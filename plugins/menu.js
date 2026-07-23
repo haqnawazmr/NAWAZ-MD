@@ -23,17 +23,17 @@ const toSmallCaps = (text) => {
     return text.split('').map(char => smallCapsMap[char] || char).join('');
 };
 
-// Format category with your exact styles
+// 🔥 NEW STYLE - Format category with new design
 const formatCategory = (category, cmds) => {
     const validCmds = cmds.filter(cmd => cmd.pattern && cmd.pattern.trim() !== '');
     if (validCmds.length === 0) return '';
     
-    let title = `\n\`『 ${category.toUpperCase()} 』\`\n╭───────────────────⊷\n`;
+    let title = `\n╭━━❰ ${category.toUpperCase()} ❱━━⬣\n`;
     let body = validCmds.map(cmd => {
         const commandName = cmd.pattern || '';
-        return `*┋ ⬡ ${toSmallCaps(commandName)}*`;
+        return `┃❖ ${toSmallCaps(commandName)}`;
     }).join('\n');
-    let footer = `\n╰───────────────────⊷`;
+    let footer = `\n╰━━━━━━━━━━━━━━⬣`;
     return `${title}${body}${footer}`;
 };
 
@@ -128,16 +128,22 @@ async (conn, mek, m, { from, sender, reply, userConfig }) => {
             }
         }
 
-        // Main menu text with new bar styles
-        let dec = `*╭┈───〔 ${BOT_NAME} 〕┈───⊷*
-*├✦ Owner:* ${OWNER_NAME}
-*├✦ Commands:* ${totalCommands}
-*├✦ Runtime:* ${runtime(process.uptime())}
-*├✦ Prefix:* ${PREFIX}
-*├✦ Mode:* ${MODE}
-*├✦ Version:* ${VERSION}
-*╰───────────────────⊷*
+        // 🔥 NEW STYLE - Main menu text with new bar styles
+        let dec = `╭━━❰ 👑 BOT INFO ❱━━⬣
+┃❖ Owner   : ${OWNER_NAME}
+┃❖ Mode    : ${MODE}
+┃❖ Prefix  : ${PREFIX}
+┃❖ Version : ${VERSION}
+┃❖ Runtime : ${runtime(process.uptime())}
+╰━━━━━━━━━━━━━━⬣
+
 ${menuSections}
+
+╭━━❰ 🛠 SUPPORT ❱━━⬣
+┃❖ ${PREFIX}owner
+┃❖ ${PREFIX}ping
+┃❖ ${PREFIX}menu
+╰━━━━━━━━━━━━━━⬣
 
 > ${DESCRIPTION}`;
 
