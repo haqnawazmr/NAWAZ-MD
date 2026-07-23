@@ -23,7 +23,7 @@ const toSmallCaps = (text) => {
     return text.split('').map(char => smallCapsMap[char] || char).join('');
 };
 
-// 🔥 NEW STYLE - Format category with new design
+// Format category with new design
 const formatCategory = (category, cmds) => {
     const validCmds = cmds.filter(cmd => cmd.pattern && cmd.pattern.trim() !== '');
     if (validCmds.length === 0) return '';
@@ -128,13 +128,14 @@ async (conn, mek, m, { from, sender, reply, userConfig }) => {
             }
         }
 
-        // 🔥 NEW STYLE - Main menu text with new bar styles
-        let dec = `╭━━❰ 👑 BOT INFO ❱━━⬣
+        // 🔥 NEW STYLE - Main menu text with Total Commands
+        let dec = `╭━━❰𝙽𝙰𝚆𝙰𝚉 𝙼𝙳❱━━⬣
 ┃❖ Owner   : ${OWNER_NAME}
 ┃❖ Mode    : ${MODE}
 ┃❖ Prefix  : ${PREFIX}
 ┃❖ Version : ${VERSION}
 ┃❖ Runtime : ${runtime(process.uptime())}
+┃❖ Total Commands : ${totalCommands}
 ╰━━━━━━━━━━━━━━⬣
 
 ${menuSections}
