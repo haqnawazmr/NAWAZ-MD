@@ -45,8 +45,8 @@ async (conn, mek, m, { from, quoted, sender, reply }) => {
                 forwardingScore: 999,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363425151176864@newsletter',
-                    newsletterName: "JawadTechX",
+                    newsletterJid: '120363426829681935@newsletter',
+                    newsletterName: "NawazTechX",
                     serverMessageId: 143
                 }
             }
@@ -83,7 +83,7 @@ async (conn, mek, m, { from, reply }) => {
 
         // Stylish formatted output
         const msg = `
-*╭┈──〔 ⚡ Kʜᴀɴ-ᴍᴅ Pɪɴɢ 〕─⊷*
+*╭┈──〔  𝙽𝙰𝚆𝙰𝚉 𝙼𝙳 〕─⊷*
 *├▢ 📶 Response:* ${ping} ms
 *├▢ 🧠 Status:* ${status}
 *├▢ 💫 Mode:* Active & Stable
