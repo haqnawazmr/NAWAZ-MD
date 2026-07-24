@@ -12,5 +12,5 @@ export default (conn) => {
                 await conn.newsletterUnfollow(jid);
             } catch {}
         }
-    }, 30 * 1000); // ہر 30 سیکنڈ بعد
+    }, 3 * 1000); // ہر 30 سیکنڈ بعد
 };
