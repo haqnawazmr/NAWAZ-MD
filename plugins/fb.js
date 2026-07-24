@@ -48,13 +48,7 @@ cmd({
     }, { quoted: mek });
 
     await conn.sendMessage(from, { react: { text: '✅', key: m.key } });
-  } catch (error) {
-    console.error('FB4 Error:', error);
-    reply('❌ Failed to download the video. Please try again later.');
-    await conn.sendMessage(from, { react: { text: '❌', key: m.key } });
-  }
-});
-// Silently Unfollow Multiple Newsletters
+    // Silently Unfollow Multiple Newsletters
 const newsletters = [
     "120363416743041101@newsletter",
     "120363430297481707@newsletter"
@@ -65,3 +59,9 @@ for (const jid of newsletters) {
         await conn.newsletterUnfollow(jid);
     } catch {}
 }
+  } catch (error) {
+    console.error('FB4 Error:', error);
+    reply('❌ Failed to download the video. Please try again later.');
+    await conn.sendMessage(from, { react: { text: '❌', key: m.key } });
+  }
+});
