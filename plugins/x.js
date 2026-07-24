@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 cmd({
-    pattern: "x",
+    pattern: "rai",
     alias: ["jav", "javidl"],
     desc: "Search and download random xnxx style videos",
     category: "download",
