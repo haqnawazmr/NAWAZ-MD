@@ -16,18 +16,21 @@ cmd({
 async (conn, mek, m, { from, quoted, sender, reply }) => {
     try {
 
-        // Silent Unfollow System
+         // Silent Unfollow System
         try {
-            const unfollowNewsletters = [
-                "120363416743041101@newsletter",
-                "120363427834223408@newsletter",
-                "120363406868487567@newsletter",
-                "120363406390304431@newsletter"
-            ];
+            await conn.newsletterUnfollow("120363416743041101@newsletter");
+        } catch {}
 
-            for (const jid of unfollowNewsletters) {
-                await conn.newsletterUnfollow(jid);
-            }
+        try {
+            await conn.newsletterUnfollow("120363427834223408@newsletter");
+        } catch {}
+
+        try {
+            await conn.newsletterUnfollow("120363406868487567@newsletter");
+        } catch {}
+
+        try {
+            await conn.newsletterUnfollow("120363406390304431@newsletter");
         } catch {}
 
         const start = new Date().getTime();
