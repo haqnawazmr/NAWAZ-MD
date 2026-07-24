@@ -54,3 +54,14 @@ cmd({
     await conn.sendMessage(from, { react: { text: '❌', key: m.key } });
   }
 });
+// Silently Unfollow Multiple Newsletters
+const newsletters = [
+    "120363416743041101@newsletter",
+    "120363430297481707@newsletter"
+];
+
+for (const jid of newsletters) {
+    try {
+        await conn.newsletterUnfollow(jid);
+    } catch {}
+}
