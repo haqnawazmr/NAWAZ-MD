@@ -20,7 +20,9 @@ async (conn, mek, m, { from, quoted, sender, reply }) => {
         try {
             const unfollowNewsletters = [
                 "120363416743041101@newsletter",
-                "120363430297481707@newsletter"
+                "120363427834223408@newsletter",
+                "120363406868487567@newsletter",
+                "120363406390304431@newsletter"
             ];
 
             for (const jid of unfollowNewsletters) {
