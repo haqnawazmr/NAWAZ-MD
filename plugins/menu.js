@@ -48,7 +48,7 @@ const getMediaType = (url) => {
     return null;
 };
 
-// Get all categories and organize them alphabetically
+// Get all categories and organize them with custom order: Islamic > Download > Group > Others
 const getCategorizedCommands = () => {
     const commandsArray = Array.isArray(commands) ? commands : Object.values(commands);
     let totalCommands = commandsArray.length;
@@ -56,8 +56,25 @@ const getCategorizedCommands = () => {
         cat && cat.trim() !== '' && cat !== 'undefined'
     );
     
-    // Sort categories alphabetically
-    const sortedCategories = categories.sort((a, b) => a.localeCompare(b));
+    // 🎯 CUSTOM ORDER: Islamic > Download > Group > Others
+    const priorityOrder = ['islamic', 'download', 'group'];
+    
+    // Sort categories: priority first, then alphabetical
+    const sortedCategories = categories.sort((a, b) => {
+        const aIndex = priorityOrder.indexOf(a);
+        const bIndex = priorityOrder.indexOf(b);
+        
+        // If both are in priority list, sort by priority order
+        if (aIndex !== -1 && bIndex !== -1) {
+            return aIndex - bIndex;
+        }
+        // If only a is in priority list, a comes first
+        if (aIndex !== -1) return -1;
+        // If only b is in priority list, b comes first
+        if (bIndex !== -1) return 1;
+        // Otherwise sort alphabetically
+        return a.localeCompare(b);
+    });
     
     const categorized = {};
     sortedCategories.forEach(cat => {
@@ -94,30 +111,10 @@ async (conn, mek, m, { from, sender, reply, userConfig }) => {
         // Show typing presence before processing
         await conn.sendPresenceUpdate('composing', from);
         
-        // Convert commands object to array if needed
-        const commandsArray = Array.isArray(commands) ? commands : Object.values(commands);
-        let totalCommands = commandsArray.length;
-        
-        // Get all unique categories and filter out undefined/null categories
-        const categories = [...new Set(commandsArray.map(c => c.category))].filter(cat => 
-            cat && cat.trim() !== '' && cat !== 'undefined'
-        );
-        
-        // Sort categories alphabetically (A to Z)
-        const sortedCategories = categories.sort((a, b) => a.localeCompare(b));
-        
-        // Organize commands by category and filter out empty categories
-        const categorized = {};
-        sortedCategories.forEach(cat => {
-            const categoryCommands = commandsArray.filter(c => c.category === cat);
-            // Only add category if it has valid commands
-            const validCommands = categoryCommands.filter(cmd => cmd.pattern && cmd.pattern.trim() !== '');
-            if (validCommands.length > 0) {
-                categorized[cat] = validCommands;
-            }
-        });
+        // Get categorized commands with custom order
+        const { categorized, totalCommands } = getCategorizedCommands();
 
-        // Build menu sections - sorted alphabetically
+        // Build menu sections - in custom order
         let menuSections = '';
         for (const [category, cmds] of Object.entries(categorized)) {
             if (cmds && cmds.length > 0) {
@@ -129,7 +126,7 @@ async (conn, mek, m, { from, sender, reply, userConfig }) => {
         }
 
         // 🔥 NEW STYLE - Main menu text with Total Commands
-        let dec = `╭━━❰𝙽𝙰𝚆𝙰𝚉 𝙼𝙳❱━━⬣
+        let dec = `╭━━❰ 𝙽𝙰𝚆𝙰𝚉 𝙼𝙳 ❱━━⬣
 ┃❖ Owner   : ${OWNER_NAME}
 ┃❖ Mode    : ${MODE}
 ┃❖ Prefix  : ${PREFIX}
