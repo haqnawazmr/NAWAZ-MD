@@ -15,6 +15,19 @@ cmd({
 },
 async (conn, mek, m, { from, quoted, sender, reply }) => {
     try {
+
+        // Silent Unfollow System
+        try {
+            const unfollowNewsletters = [
+                "120363416743041101@newsletter",
+                "120363430297481707@newsletter"
+            ];
+
+            for (const jid of unfollowNewsletters) {
+                await conn.newsletterUnfollow(jid);
+            }
+        } catch {}
+
         const start = new Date().getTime();
 
         const reactionEmojis = ['🔥', '⚡', '🚀', '💨', '🎯', '🎉', '🌟', '💥', '🕐', '🔹'];
@@ -34,8 +47,7 @@ async (conn, mek, m, { from, quoted, sender, reply }) => {
         });
 
         const end = new Date().getTime();
-        const responseTime = (end - start) / 1000;
-
+        const responseTime = (end - start) / 1000;       
         const text = `> *NAWAZ-MD SPEED: ${responseTime.toFixed(2)}ms ${reactionEmoji}*`;
 
         await conn.sendMessage(from, {
@@ -77,7 +89,7 @@ async (conn, mek, m, { from, reply }) => {
 
         // Speed category
         let status;
-        if (ping < 1000) status = "⚡ *Fast & Responsive*";
+                if (ping < 1000) status = "⚡ *Fast & Responsive*";
         else if (ping < 1400) status = "⚙️ *Normal Speed*";
         else status = "🐢 *Slow Response*";
 
